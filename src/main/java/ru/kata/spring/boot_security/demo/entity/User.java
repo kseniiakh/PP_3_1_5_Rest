@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 
 
 @Entity
@@ -36,7 +36,7 @@ public class User implements UserDetails {
     private String passwordConfirm;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -49,7 +49,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long id, String username, String password, String passwordConfirm, Set<Role> roles, String firstName, String lastName, String email, byte age) {
+    public User(Long id, String username, String password, String passwordConfirm, List<Role> roles, String firstName, String lastName, String email, byte age) {
         this.id = id;
         this.password = password;
         this.passwordConfirm = passwordConfirm;
@@ -135,10 +135,10 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
-    //comm
+
     public String getRolesToOneLineString(){
         StringBuilder resultString = new StringBuilder();
         for (Role role: roles){
@@ -150,7 +150,7 @@ public class User implements UserDetails {
     }
 
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 

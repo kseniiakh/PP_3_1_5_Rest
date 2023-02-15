@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.entity;
 
 import org.springframework.security.core.GrantedAuthority;
-import ru.kata.spring.boot_security.demo.entity.User;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -62,6 +61,5 @@ public class Role implements GrantedAuthority {
 
     public String getNoPrefix() {
         return name.substring(5);
-
     }
 }

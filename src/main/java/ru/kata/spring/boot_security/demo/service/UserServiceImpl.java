@@ -8,26 +8,28 @@ import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-
-    @Autowired
     UserRepository userRepository;
-
-    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public List<User> showAll() {
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 
 
-    public User show(Long userId) {
+    public User showById(Long userId) {
 
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElse(new User());
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
